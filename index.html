@@ -1,0 +1,38 @@
+<!DOCTYPE html> 
+<html>
+    <head>
+        <title> Websocket </title> 
+    </head>
+    <body>
+        <button id="sendButton">send messages</button>
+        <div id="messages"></div>
+        <h1 id="message"></h1>
+        <button id="sendmsg">Send</button>
+        <input type="text" id="MessageFromButton" />
+        <script>
+            const ws = new WebSocket('ws://localhost:8080');
+                ws.onmessage=function(event){
+                document.getElementById("result").value=event.data;
+                let isConnected = false;
+            
+            };
+            ws.onopen = function() {
+                isConnected = true;
+                console.log('websocket has opened')
+
+            }
+            document.getElementById("sendButton").onclick = function() {
+                ws.send("Hello from the website/client @ " + Date());
+            };
+           
+                document.getElementById("sendmsg").onclick = function() {
+                    const inputfield = document.getElementById("MessageFromButton");
+                        console.log(ws.send(inputfield.value));
+                        inputfield.value = '';
+            
+                };
+
+
+        </script>
+    </body>
+</html>
